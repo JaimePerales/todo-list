@@ -1,4 +1,4 @@
 import './style.css'
-import initializeDisplay from './displayHandler';
+import initializeController from './taskListController';
 
-initializeDisplay();
+initializeController();
