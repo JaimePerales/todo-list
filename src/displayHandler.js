@@ -8,8 +8,11 @@
        content.appendChild(listWrapper);
        listWrapper.appendChild(listOfTaskLists);
        listOfTaskLists.id = 'list-list';
+
+       const listInputDiv = document.createElement('div');
        const listTitleInput = document.createElement('input');
-       listWrapper.appendChild(listTitleInput);
+       listInputDiv.appendChild(listTitleInput);
+       listWrapper.appendChild(listInputDiv);
        listTitleInput.id = 'list-input'
 
 
@@ -72,8 +75,12 @@
        for (let i = 0, l = list.length; i < l; i += 1) {
            const task = document.createElement('div');
            const taskTitle = document.createElement('h1');
+           const deleteButton = document.createElement('button');
+           deleteButton.textContent = 'X';
+           task.classList.add('todo-item');
            taskTitle.textContent = list[i].title;
            task.appendChild(taskTitle);
+           task.appendChild(deleteButton);
            listDiv.appendChild(task);
        }
 

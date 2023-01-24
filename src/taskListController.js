@@ -5,22 +5,40 @@ import Model from './model';
 
 import TodoItem from './todoItem';
 
-const attachEventListener = (model) => {
+
+
+const attachDeleteTaskEventListener = (model) => {
+    const listButtons = document.querySelectorAll('.todo-item button');
+    for (let i = 0, l = listButtons.length; i < l; i += 1) {
+        listButtons[i].addEventListener('click', () => {
+            model.currentList.splice(i, 1);
+            displayList(model.currentList);
+            attachDeleteTaskEventListener(model);
+        })
+    }
+}
+
+const attachChangeListEventListener = (model) => {
     const listButtons = document.querySelectorAll('#list-list button');
     for (let i = 0, l = listButtons.length; i < l; i += 1) {
         listButtons[i].addEventListener('click', () => {
             model.currentList = model.allLists[i];
             displayList(model.currentList);
+            attachDeleteTaskEventListener(model);
         })
     }
 }
 
 const initializeController = () => {
     const model = new Model();
+    const lame = new TodoItem();
+    lame.title = 'Test';
+    model.defaultList.push(lame);
     initializeDisplay();
     displayLists(model.allLists);
     displayList(model.currentList);
-    attachEventListener(model);
+    attachChangeListEventListener(model);
+    attachDeleteTaskEventListener(model);
 
     const taskTitleInput = document.querySelector('#task-input');
 
@@ -31,6 +49,7 @@ const initializeController = () => {
             item.title = taskTitleInput.value;
             model.currentList.push(item);
             displayList(model.currentList);
+            attachDeleteTaskEventListener(model);
             taskTitleInput.value = null;
 
         }
@@ -45,8 +64,10 @@ const initializeController = () => {
             item.name = listTitleInput.value;
             model.allLists.push(item);
             displayLists(model.allLists);
+            model.currentList = item;
+            displayList(model.currentList)
             listTitleInput.value = null;
-            attachEventListener(model);
+            attachChangeListEventListener(model);
 
         }
     });
