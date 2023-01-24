@@ -25,7 +25,25 @@ body {
     padding: 1rem;
 }
 
-.todo-item button {
+.list {
+    background-color: blueviolet;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.list-select-button {
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: flex-start;
+}
+
+.todo-item button,
+.list-delete-button {
     height: fit-content;
     background-color: rgba(0, 0, 0, 0);
     border: none;

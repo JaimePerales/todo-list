@@ -19,7 +19,7 @@ const attachDeleteTaskEventListener = (model) => {
 }
 
 const attachChangeListEventListener = (model) => {
-    const listButtons = document.querySelectorAll('#list-list button');
+    const listButtons = document.querySelectorAll('.list-select-button');
     for (let i = 0, l = listButtons.length; i < l; i += 1) {
         listButtons[i].addEventListener('click', () => {
             model.currentList = model.allLists[i];

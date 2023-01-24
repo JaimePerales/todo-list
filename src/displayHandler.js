@@ -52,12 +52,20 @@
        clearLists();
        const listListDiv = document.querySelector('#list-list');
        for (let i = 0, l = listOfLists.length; i < l; i += 1) {
+           const listItemDiv = document.createElement('div');
            const list = document.createElement('button');
+           list.classList.add('list-select-button');
            list.id = i;
+           listItemDiv.classList.add('list');
            const listTitle = document.createElement('h1');
            listTitle.textContent = listOfLists[i].name;
            list.appendChild(listTitle);
-           listListDiv.appendChild(list);
+           const deleteButton = document.createElement('button');
+           deleteButton.textContent = 'X';
+           deleteButton.classList.add('list-delete-button');
+           listItemDiv.appendChild(list);
+           listItemDiv.appendChild(deleteButton);
+           listListDiv.appendChild(listItemDiv);
        }
    }
 
