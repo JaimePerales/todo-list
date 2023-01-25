@@ -18,6 +18,7 @@ const attachDeleteTaskEventListener = (model) => {
     }
 }
 
+
 const attachChangeListEventListener = (model) => {
     const listButtons = document.querySelectorAll('.list-select-button');
     for (let i = 0, l = listButtons.length; i < l; i += 1) {
@@ -29,6 +30,20 @@ const attachChangeListEventListener = (model) => {
     }
 }
 
+const attachDeleteListEventListener = (model) => {
+    const listButtons = document.querySelectorAll('.list-delete-button');
+    for (let i = 0, l = listButtons.length; i < l; i += 1) {
+        listButtons[i].addEventListener('click', () => {
+            model.allLists.splice(i, 1);
+            displayLists(model.allLists);
+            displayList([]);
+            attachChangeListEventListener(model);
+            attachDeleteListEventListener(model);
+        })
+    }
+}
+
+
 const initializeController = () => {
     const model = new Model();
     const lame = new TodoItem();
@@ -39,6 +54,7 @@ const initializeController = () => {
     displayList(model.currentList);
     attachChangeListEventListener(model);
     attachDeleteTaskEventListener(model);
+    attachDeleteListEventListener(model);
 
     const taskTitleInput = document.querySelector('#task-input');
 
@@ -64,6 +80,7 @@ const initializeController = () => {
             item.name = listTitleInput.value;
             model.allLists.push(item);
             displayLists(model.allLists);
+            attachDeleteListEventListener(model);
             model.currentList = item;
             displayList(model.currentList)
             listTitleInput.value = null;
