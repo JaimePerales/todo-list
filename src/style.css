@@ -89,3 +89,23 @@ body {
     width: 500px;
     background-color: aqua;
 }
+
+#expanded-task {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.todo-item h1 {
+    width: 90%;
+}

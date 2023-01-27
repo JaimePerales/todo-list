@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-loop-func */
 /* eslint-disable no-param-reassign */
 import { initializeDisplay, displayLists, displayList } from './displayHandler';
 
@@ -6,55 +8,21 @@ import Model from './model';
 import TodoItem from './todoItem';
 
 
-
-const attachDeleteTaskEventListener = (model) => {
-    const listButtons = document.querySelectorAll('.todo-item button');
-    for (let i = 0, l = listButtons.length; i < l; i += 1) {
-        listButtons[i].addEventListener('click', () => {
-            model.currentList.splice(i, 1);
-            displayList(model.currentList);
-            attachDeleteTaskEventListener(model);
-        })
-    }
-}
-
-
-const attachChangeListEventListener = (model) => {
-    const listButtons = document.querySelectorAll('.list-select-button');
-    for (let i = 0, l = listButtons.length; i < l; i += 1) {
-        listButtons[i].addEventListener('click', () => {
-            model.currentList = model.allLists[i];
-            displayList(model.currentList);
-            attachDeleteTaskEventListener(model);
-        })
-    }
-}
-
-const attachDeleteListEventListener = (model) => {
-    const listButtons = document.querySelectorAll('.list-delete-button');
-    for (let i = 0, l = listButtons.length; i < l; i += 1) {
-        listButtons[i].addEventListener('click', () => {
-            model.allLists.splice(i, 1);
-            displayLists(model.allLists);
-            displayList([]);
-            attachChangeListEventListener(model);
-            attachDeleteListEventListener(model);
-        })
-    }
-}
-
-
 const initializeController = () => {
     const model = new Model();
     const lame = new TodoItem();
     lame.title = 'Test';
+    const lame2 = new TodoItem();
+    lame2.title = 'Test2';
+    const lame3 = new TodoItem();
+    lame3.title = 'Test3';
     model.defaultList.push(lame);
+    model.defaultList.push(lame2);
+    model.defaultList.push(lame3);
     initializeDisplay();
-    displayLists(model.allLists);
-    displayList(model.currentList);
-    attachChangeListEventListener(model);
-    attachDeleteTaskEventListener(model);
-    attachDeleteListEventListener(model);
+    displayLists(model);
+    displayList(model);
+
 
     const taskTitleInput = document.querySelector('#task-input');
 
@@ -64,8 +32,8 @@ const initializeController = () => {
             const item = new TodoItem();
             item.title = taskTitleInput.value;
             model.currentList.push(item);
-            displayList(model.currentList);
-            attachDeleteTaskEventListener(model);
+            displayList(model);
+
             taskTitleInput.value = null;
 
         }
@@ -79,15 +47,15 @@ const initializeController = () => {
             const item = [];
             item.name = listTitleInput.value;
             model.allLists.push(item);
-            displayLists(model.allLists);
-            attachDeleteListEventListener(model);
+            displayLists(model);
             model.currentList = item;
-            displayList(model.currentList)
+            displayList(model)
             listTitleInput.value = null;
-            attachChangeListEventListener(model);
+
 
         }
     });
+
 
 
 }
