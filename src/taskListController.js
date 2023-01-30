@@ -1,11 +1,15 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-param-reassign */
+
+import { format } from 'date-fns';
+
 import { initializeDisplay, displayLists, displayList } from './displayHandler';
 
 import Model from './model';
 
 import TodoItem from './todoItem';
+
 
 
 const initializeController = () => {
@@ -29,8 +33,8 @@ const initializeController = () => {
     taskTitleInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
 
-            const item = new TodoItem();
-            item.title = taskTitleInput.value;
+            const item = new TodoItem(taskTitleInput.value, "Task Description", format(new Date(), 'yyyy-MM-dd'), 'HIGH', '');
+
             model.currentList.push(item);
             displayList(model);
 

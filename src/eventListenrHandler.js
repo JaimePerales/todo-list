@@ -4,6 +4,7 @@
 /* eslint-disable no-use-before-define */
 
 import { displayList, displayLists } from "./displayHandler";
+import TodoItem from "./todoItem";
 
 
 export const attachExpandTaskEventListener = (model) => {
@@ -17,12 +18,27 @@ export const attachExpandTaskEventListener = (model) => {
             const newEle = expandedScreenButton.cloneNode(true);
             newEle.addEventListener('click', (event) => {
                 event.preventDefault();
-                testTest(e, model, i, title, expandedScreen)
+                const tempTodo = new TodoItem(title, description, dueDate, priority, notes);
+                testTest(e, model, i, tempTodo, expandedScreen)
             });
             expandedScreenButton.parentNode.replaceChild(newEle, expandedScreenButton);
             expandedScreen.classList.remove('hidden');
-            const title = document.querySelector('#fname');
+
+            const title = document.querySelector('#name');
             title.value = model.currentList[i].title;
+
+            const description = document.querySelector('#description');
+            description.value = model.currentList[i].description;
+
+            const dueDate = document.querySelector('#dueDate');
+            dueDate.value = model.currentList[i].dueDate;
+
+
+            const priority = document.querySelector('#priority');
+            priority.value = model.currentList[i].priority;
+
+            const notes = document.querySelector('#notes');
+            notes.value = model.currentList[i].notes;
 
 
 
@@ -35,9 +51,13 @@ export const attachExpandTaskEventListener = (model) => {
 
 }
 
-const testTest = (event, model, i, title, expandedScreen) => {
+const testTest = (event, model, i, tempTodo, expandedScreen) => {
 
-    model.currentList[i].title = title.value;
+    model.currentList[i].title = tempTodo.title.value;
+    model.currentList[i].description = tempTodo.description.value;
+    model.currentList[i].dueDate = tempTodo.dueDate.value;
+    model.currentList[i].priority = tempTodo.priority.value;
+    model.currentList[i].notes = tempTodo.notes.value;
     expandedScreen.classList.add('hidden');
     displayList(model);
 
