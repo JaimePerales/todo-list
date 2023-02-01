@@ -7,11 +7,29 @@ import { displayList, displayLists } from "./displayHandler";
 import TodoItem from "./todoItem";
 
 
+
+
+
 export const attachExpandTaskEventListener = (model) => {
     const todoItems = document.querySelectorAll('.todo-item h1');
     const expandedScreen = document.querySelector('#expanded-task');
     const expandedScreenButton = document.querySelector('#expanded-task-button');
+    window.addEventListener('click', (e) => {
+        if (e.target === expandedScreen) {
 
+            expandedScreen.classList.add('hidden');
+            displayList(model)
+
+        }
+    });
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+
+            expandedScreen.classList.add('hidden');
+            displayList(model)
+
+        }
+    })
 
     for (let i = 0, l = todoItems.length; i < l; i += 1) {
         todoItems[i].addEventListener('click', (e) => {
@@ -21,7 +39,10 @@ export const attachExpandTaskEventListener = (model) => {
                 const tempTodo = new TodoItem(title, description, dueDate, priority, notes);
                 testTest(e, model, i, tempTodo, expandedScreen)
             });
-            expandedScreenButton.parentNode.replaceChild(newEle, expandedScreenButton);
+            if (expandedScreenButton.parentNode !== null) {
+                expandedScreenButton.parentNode.replaceChild(newEle, expandedScreenButton);
+            }
+
             expandedScreen.classList.remove('hidden');
 
             const title = document.querySelector('#name');
