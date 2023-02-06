@@ -103,8 +103,10 @@ export const attachChangeListEventListener = (model) => {
     const listButtons = document.querySelectorAll('.list-select-button');
     for (let i = 0, l = listButtons.length; i < l; i += 1) {
         listButtons[i].addEventListener('click', () => {
+            displayLists(model);
             model.currentList = model.allLists[i];
-
+            const lists = document.getElementById('list-list').children;
+            lists.item(i).classList.add('current-list');
             displayList(model);
 
         })

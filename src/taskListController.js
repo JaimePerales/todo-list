@@ -22,6 +22,8 @@ const initializeController = () => {
     initializeDisplay();
     displayLists(model);
     displayList(model);
+    const currentList = document.querySelector('.list');
+    currentList.classList.add('current-list');
 
 
     const taskTitleInput = document.querySelector('#task-input');
@@ -50,6 +52,8 @@ const initializeController = () => {
             displayLists(model);
             model.currentList = item;
             displayList(model)
+            const lists = document.getElementById('list-list').lastChild;
+            lists.classList.add('current-list');
             listTitleInput.value = null;
 
 

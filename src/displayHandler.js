@@ -13,6 +13,7 @@ const initializeDisplay = () => {
     listOfTaskLists.id = 'list-list';
 
     const listInputDiv = document.createElement('div');
+    listInputDiv.id = 'list-input-div';
     const listTitleInput = document.createElement('input');
     listInputDiv.appendChild(listTitleInput);
     listWrapper.appendChild(listInputDiv);

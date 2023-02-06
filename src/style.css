@@ -1,127 +1,107 @@
-body {
+:root {
+    --black: #000000ff;
+    --jet: #323232ff;
+    --davys-grey: #5e5e5eff;
+    --quick-silver: #a0a0a0ff;
+    --platinum: #e2e2e2ff;
+}
+
+* {
+    padding: 0;
+    margin: 0;
     overflow-y: hidden;
 }
 
-#form-container {
+#header {
+    background-color: var(--platinum);
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    justify-content: center;
-    width: 900px;
-    height: 700px;
-    background-color: white;
-}
-
-#form {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
+    height: 75px;
 }
 
 #content {
-    display: flex;
-    align-items: center;
-    gap: 10rem;
+    display: grid;
+    background-color: var(--davys-grey);
+    grid-template-columns: 9fr 40fr;
+    height: 100vh;
+    gap: 10px;
+    width: 100vw;
 }
 
+#list-wrapper,
+#task-wrapper {
+    padding-top: 10px;
+    height: 90%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 10fr 1fr;
+}
+
+#list-list,
 #task-list {
     display: flex;
     flex-direction: column;
-    height: 800px;
-    width: 800px;
+    align-items: center;
     overflow-y: auto;
-    background-color: aqua;
+    gap: 10px;
 }
 
-.todo-item {
-    background-color: blueviolet;
+#list-input-div,
+#task-input-div {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 1rem;
+    background-color: var(--quick-silver);
 }
 
-.list {
-    background-color: blueviolet;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-}
-
-.list-select-button {
-    width: 90%;
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    color: rgb(255, 255, 255);
-    display: flex;
-    justify-content: flex-start;
-}
-
-.todo-item button,
-.list-delete-button {
-    height: fit-content;
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    color: rgb(255, 255, 255);
-    font-size: 2rem;
-}
-
-.todo-item button:hover {
-    color: rgb(155, 155, 155);
-}
-
-.todo-item button:active {
-    color: rgb(55, 55, 55);
+#list-input-div {
+    background-color: var(--davys-grey);
 }
 
 #list-input {
-    width: 492px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    margin-bottom: 10px;
-    margin-left: 9px;
+    width: 90%
 }
 
-#task-input {
-    width: 792px;
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 10px;
+.list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--platinum);
+    height: 80px;
+    width: 95%;
 }
 
-#list-wrapper {
+.list-select-button {
+    width: 95%;
+    height: 100%;
+    border: none;
+    background-color: var(--platinum);
+}
+
+#task-list {
+    background-color: var(--quick-silver);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
 }
 
-#list-list {
+.todo-item {
+    background-color: var(--platinum);
+    flex-shrink: 0;
     display: flex;
-    flex-direction: column;
-    height: 800px;
-    width: 500px;
-    background-color: aqua;
-}
-
-#expanded-task {
-    position: fixed;
-    display: flex;
-    justify-content: center;
+    width: 75%;
+    justify-content: space-between;
     align-items: center;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, .5);
+    height: 100px;
 }
 
 .hidden {
     visibility: hidden;
 }
 
-.todo-item h1 {
-    width: 90%;
+.current-list {
+    border-style: solid;
+    border-color: #0000ff;
 }
