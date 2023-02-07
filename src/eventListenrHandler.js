@@ -3,7 +3,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-use-before-define */
 
-import { displayList, displayLists } from "./displayHandler";
+import { displayList, displayLists, clearList } from "./displayHandler";
 import TodoItem from "./todoItem";
 
 
@@ -119,10 +119,15 @@ export const attachDeleteListEventListener = (model) => {
         listButtons[i].addEventListener('click', () => {
             model.allLists.splice(i, 1);
             displayLists(model);
-            if (model.currentList === undefined) {
+            if (model.currentList.value === undefined) {
                 // eslint-disable-next-line prefer-destructuring
                 model.currentList = model.allLists[0];
-                displayList(model);
+                if (document.querySelector('#list-list').firstChild != null) {
+                    document.querySelector('#list-list').firstChild.classList.add('current-list');
+                    displayList(model);
+                } else {
+                    clearList()
+                }
             }
 
         })

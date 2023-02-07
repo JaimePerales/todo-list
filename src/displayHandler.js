@@ -109,5 +109,6 @@ const displayList = (model) => {
 export {
     initializeDisplay,
     displayLists,
-    displayList
+    displayList,
+    clearList,
 };
