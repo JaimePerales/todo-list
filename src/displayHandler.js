@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import { attachChangeListEventListener, attachDeleteTaskEventListener, attachDeleteListEventListener, attachExpandTaskEventListener } from './eventListenrHandler';
+import { attachChangeListEventListener, attachDeleteTaskEventListener, attachDeleteListEventListener, attachExpandTaskEventListener, attachCompleteTaskEventListener } from './eventListenrHandler';
 
 const initializeDisplay = () => {
 
@@ -88,18 +88,37 @@ const displayList = (model) => {
     const listDiv = document.querySelector('#task-list');
     for (let i = 0, l = model.currentList.length; i < l; i += 1) {
         const task = document.createElement('div');
-        const taskTitle = document.createElement('h1');
+        const taskTitle = document.createElement('p');
         const deleteButton = document.createElement('button');
+        const checkBoxDiv = document.createElement('div');
+        checkBoxDiv.id = 'checkbox-div';
+        const checkBox = document.createElement('input');
+        const titleCheckBoxDiv = document.createElement('div');
+        titleCheckBoxDiv.id = 'titlecheck-div';
+        checkBox.type = 'checkbox';
+        checkBox.id = `checkbox-${i}`;
+        checkBoxDiv.appendChild(checkBox);
         deleteButton.textContent = 'X';
         task.classList.add('todo-item');
         task.id = i;
         taskTitle.textContent = model.currentList[i].title;
-        task.appendChild(taskTitle);
+        if (model.currentList[i].completed) {
+            checkBox.checked = true;
+            titleCheckBoxDiv.classList.add('checked');
+        } else {
+
+            checkBox.checked = false;
+            titleCheckBoxDiv.classList.remove('checked');
+        }
+        titleCheckBoxDiv.appendChild(checkBoxDiv);
+        titleCheckBoxDiv.appendChild(taskTitle);
+        task.appendChild(titleCheckBoxDiv);
         task.appendChild(deleteButton);
         listDiv.appendChild(task);
     }
 
     attachDeleteTaskEventListener(model);
+    attachCompleteTaskEventListener(model);
     attachExpandTaskEventListener(model);
 
 

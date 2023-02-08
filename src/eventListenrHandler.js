@@ -37,7 +37,7 @@ export const attachExpandTaskEventListener = (model) => {
             newEle.addEventListener('click', (event) => {
                 event.preventDefault();
                 const tempTodo = new TodoItem(title, description, dueDate, priority, notes);
-                testTest(e, model, i, tempTodo, expandedScreen)
+                updateCurrentTask(e, model, i, tempTodo, expandedScreen)
             });
             if (expandedScreenButton.parentNode !== null) {
                 expandedScreenButton.parentNode.replaceChild(newEle, expandedScreenButton);
@@ -72,7 +72,7 @@ export const attachExpandTaskEventListener = (model) => {
 
 }
 
-const testTest = (event, model, i, tempTodo, expandedScreen) => {
+const updateCurrentTask = (event, model, i, tempTodo, expandedScreen) => {
 
     model.currentList[i].title = tempTodo.title.value;
     model.currentList[i].description = tempTodo.description.value;
@@ -92,9 +92,25 @@ export const attachDeleteTaskEventListener = (model) => {
     for (let i = 0, l = listButtons.length; i < l; i += 1) {
         listButtons[i].addEventListener('click', () => {
             model.currentList.splice(i, 1);
-
             displayList(model);
 
+        })
+    }
+}
+
+export const attachCompleteTaskEventListener = (model) => {
+    const listCheckboxes = document.querySelectorAll('.todo-item input');
+    const list = document.querySelectorAll('.todo-item p');
+    for (let i = 0, l = listCheckboxes.length; i < l; i += 1) {
+        listCheckboxes[i].addEventListener('change', () => {
+
+            if (listCheckboxes[i].checked) {
+                list[i].classList.add('checked');
+                model.currentList[i].completed = true;
+            } else {
+                list[i].classList.remove('checked');
+                model.currentList[i].completed = false;
+            }
         })
     }
 }

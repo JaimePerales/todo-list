@@ -14,9 +14,12 @@ import TodoItem from './todoItem';
 
 const initializeController = () => {
     const model = new Model();
-    // const lame = new TodoItem('Test', 'First Test', format(new Date(), 'yyyy-MM-dd'), 'high', '');
-    // const lame2 = new TodoItem('Test2', 'Second Test', format(new Date(), 'yyyy-MM-dd'), 'medium', '');
-    // const lame3 = new TodoItem('Test3', 'Third Test', format(new Date(), 'yyyy-MM-dd'), 'low', '');
+    const lame = new TodoItem('Test', 'First Test', format(new Date(), 'yyyy-MM-dd'), 'high', '');
+    const lame2 = new TodoItem('Test2', 'Second Test', format(new Date(), 'yyyy-MM-dd'), 'medium', '');
+    const lame3 = new TodoItem('Test3', 'Third Test', format(new Date(), 'yyyy-MM-dd'), 'low', '');
+    model.currentList.push(lame);
+    model.currentList.push(lame2);
+    model.currentList.push(lame3);
 
 
     initializeDisplay();
