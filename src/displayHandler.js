@@ -90,7 +90,7 @@ const displayList = (model) => {
         const task = document.createElement('div');
         const taskTitle = document.createElement('p');
         const deleteButton = document.createElement('button');
-        const checkBoxDiv = document.createElement('div');
+        const checkBoxDiv = document.createElement('label');
         checkBoxDiv.id = 'checkbox-div';
         const checkBox = document.createElement('input');
         const titleCheckBoxDiv = document.createElement('div');
