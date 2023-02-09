@@ -11,7 +11,7 @@ import TodoItem from "./todoItem";
 
 
 export const attachExpandTaskEventListener = (model) => {
-    const todoItems = document.querySelectorAll('.todo-item h1');
+    const todoItems = document.querySelectorAll('.todo-item p');
     const expandedScreen = document.querySelector('#expanded-task');
     const expandedScreenButton = document.querySelector('#expanded-task-button');
     window.addEventListener('click', (e) => {

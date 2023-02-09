@@ -97,7 +97,10 @@ const displayList = (model) => {
         titleCheckBoxDiv.id = 'titlecheck-div';
         checkBox.type = 'checkbox';
         checkBox.id = `checkbox-${i}`;
+        const customCheckbox = document.createElement('span');
+        customCheckbox.classList.add('custom-checkbox');
         checkBoxDiv.appendChild(checkBox);
+        checkBoxDiv.appendChild(customCheckbox);
         deleteButton.textContent = 'X';
         task.classList.add('todo-item');
         task.id = i;
