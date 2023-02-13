@@ -10,16 +10,22 @@ import Model from './model';
 
 import TodoItem from './todoItem';
 
+import List from "./list";
+
 
 
 const initializeController = () => {
-    const model = new Model();
-    const lame = new TodoItem('Test', 'First Test', format(new Date(), 'yyyy-MM-dd'), 'high', '');
-    const lame2 = new TodoItem('Test2', 'Second Test', format(new Date(), 'yyyy-MM-dd'), 'medium', '');
-    const lame3 = new TodoItem('Test3', 'Third Test', format(new Date(), 'yyyy-MM-dd'), 'low', '');
-    model.currentList.push(lame);
-    model.currentList.push(lame2);
-    model.currentList.push(lame3);
+    // const model = new Model();
+    let model = new Model();
+
+    if (localStorage.getItem('data') !== null) {
+
+        model = JSON.parse(window.localStorage.getItem('data'));
+    } else {
+        model = new Model();
+    }
+
+
 
 
     initializeDisplay();
@@ -36,7 +42,7 @@ const initializeController = () => {
 
             const item = new TodoItem(taskTitleInput.value, "Task Description", format(new Date(), 'yyyy-MM-dd'), 'HIGH', '');
 
-            model.currentList.push(item);
+            model.currentList.list.push(item);
             displayList(model);
 
             taskTitleInput.value = null;
@@ -49,11 +55,11 @@ const initializeController = () => {
     listTitleInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
 
-            const item = [];
-            item.name = listTitleInput.value;
-            model.allLists.push(item);
+            const newList = new List(listTitleInput.value);
+
+            model.allLists.push(newList);
             displayLists(model);
-            model.currentList = item;
+            model.currentList = newList;
             displayList(model)
             const lists = document.getElementById('list-list').lastChild;
             lists.classList.add('current-list');

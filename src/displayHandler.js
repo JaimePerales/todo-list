@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable import/no-cycle */
 import { attachChangeListEventListener, attachDeleteTaskEventListener, attachDeleteListEventListener, attachExpandTaskEventListener, attachCompleteTaskEventListener } from './eventListenrHandler';
 
@@ -61,7 +62,7 @@ const displayLists = (model) => {
         list.classList.add('list-select-button');
         listItemDiv.classList.add('list');
         const listTitle = document.createElement('h1');
-        listTitle.textContent = model.allLists[i].name;
+        listTitle.textContent = model.allLists[i].title;
         list.appendChild(listTitle);
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'X';
@@ -85,8 +86,10 @@ const clearList = () => {
 }
 const displayList = (model) => {
     clearList();
+    localStorage.setItem('data', JSON.stringify(model));
+    model = JSON.parse(window.localStorage.getItem('data'));
     const listDiv = document.querySelector('#task-list');
-    for (let i = 0, l = model.currentList.length; i < l; i += 1) {
+    for (let i = 0, l = model.currentList.list.length; i < l; i += 1) {
         const task = document.createElement('div');
         const taskTitle = document.createElement('p');
         const deleteButton = document.createElement('button');
@@ -104,8 +107,8 @@ const displayList = (model) => {
         deleteButton.textContent = 'X';
         task.classList.add('todo-item');
         task.id = i;
-        taskTitle.textContent = model.currentList[i].title;
-        if (model.currentList[i].completed) {
+        taskTitle.textContent = model.currentList.list[i].title;
+        if (model.currentList.list[i].completed) {
             checkBox.checked = true;
             titleCheckBoxDiv.classList.add('checked');
         } else {
@@ -123,6 +126,8 @@ const displayList = (model) => {
     attachDeleteTaskEventListener(model);
     attachCompleteTaskEventListener(model);
     attachExpandTaskEventListener(model);
+
+
 
 
 }

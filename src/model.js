@@ -1,7 +1,9 @@
+import List from "./list";
+
 class Model {
     allLists = [];
 
-    defaultList = [];
+    defaultList = new List('Default');
 
     currentList = this.defaultList;
 
